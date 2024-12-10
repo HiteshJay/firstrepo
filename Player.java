@@ -1,34 +1,46 @@
+import java.util.Objects;
+
 public class Player {
+    private String userId;
+    private String username;
+    private String email;
+    private String passwordHash;
+    private Statistics statistics;
 
-	private string userId;
-	private string username;
-	private string email;
-	private string passwordHash;
-	private Statistics statistics;
+    public Player(String userId, String username, String email, String passwordHash) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.statistics = new Statistics();
+    }
 
-	/**
-	 * email: String, password: String
-	 * @param email
-	 * @param password
-	 */
-	public boolean register(String email, String password) {
-		// TODO - implement Player.register
-		throw new UnsupportedOperationException();
-	}
+    public boolean register(String email, String password) {
+        // Simulate registration logic
+        this.email = email;
+        this.passwordHash = hashPassword(password);
+        System.out.println("User registered: " + email);
+        return true;
+    }
 
-	/**
-	 * 
-	 * @param email
-	 * @param password
-	 */
-	public Boolean login(String email, String password) {
-		// TODO - implement Player.login
-		throw new UnsupportedOperationException();
-	}
+    public Boolean login(String email, String password) {
+        if (Objects.equals(this.email, email) && Objects.equals(this.passwordHash, hashPassword(password))) {
+            System.out.println("Login successful for: " + email);
+            return true;
+        }
+        System.out.println("Login failed for: " + email);
+        return false;
+    }
 
-	public Void logout() {
-		// TODO - implement Player.logout
-		throw new UnsupportedOperationException();
-	}
+    public void logout() {
+        System.out.println("User logged out: " + email);
+    }
 
+    private String hashPassword(String password) {
+        return Integer.toString(password.hashCode()); // Simplified hashing
+    }
+}
+
+class Statistics {
+    // Track player statistics like wins, losses, etc.
 }
