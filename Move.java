@@ -1,18 +1,19 @@
 public class Move {
+    private String moveId;
+    private Game game;
+    private User player;
+    private Position position;
+    private Symbol symbol;
 
-	private String moveId;
-	private Games game;
-	private User player;
-	private Position position;
-	private Symbol symbol;
+    public Move(Game game, User player, Position position, Symbol symbol) {
+        this.moveId = "MOVE-" + System.currentTimeMillis();
+        this.game = game;
+        this.player = player;
+        this.position = position;
+        this.symbol = symbol;
+    }
 
-	/**
-	 * 
-	 * @param position
-	 */
-	public Boolean validateMove(Position position) {
-		// TODO - implement Move.validateMove
-		throw new UnsupportedOperationException();
-	}
-
+    public Boolean validateMove(Position position) {
+        return game != null && game.makeMove(player, position);
+    }
 }
